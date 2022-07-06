@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/market-place")
 public class MarketPlaceController {
 
-    @PostMapping("/event")
-    public ResponseEntity<MarketPlaceEvent> postMarketPlaceEvent(@RequestBody MarketPlaceEvent marketPlaceEvent){
-        // publish the message to kafka broker
-        return ResponseEntity.status(HttpStatus.CREATED).body(marketPlaceEvent);
-    }
+  @PostMapping("/event")
+  public ResponseEntity<MarketPlaceEvent> postMarketPlaceEvent(
+      @RequestBody MarketPlaceEvent marketPlaceEvent) {
+    // publish the message to kafka broker
+    return ResponseEntity.status(HttpStatus.CREATED).body(marketPlaceEvent);
+  }
 }
