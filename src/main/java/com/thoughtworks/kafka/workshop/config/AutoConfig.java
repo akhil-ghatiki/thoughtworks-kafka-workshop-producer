@@ -11,8 +11,8 @@ import org.springframework.kafka.config.TopicBuilder;
 public class AutoConfig {
 
   /**
-   * The profile is set to local only This auto config should never be used in production
-   * environment
+   * The profile is set to local only.This auto config to create topics should never be used in
+   * production environment
    */
   @Bean
   public NewTopic marketPlaceEvents() {
