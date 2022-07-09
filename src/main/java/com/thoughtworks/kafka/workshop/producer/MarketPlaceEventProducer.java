@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import java.util.concurrent.ExecutionException;
+
 @Component
 @Slf4j
 public class MarketPlaceEventProducer {
@@ -46,4 +48,20 @@ public class MarketPlaceEventProducer {
           }
         });
   }
+
+  public SendResult<Integer, String> sendMarketPlaceEventSynchronous(MarketPlaceEvent marketPlaceEvent) throws JsonProcessingException {
+      Integer key = marketPlaceEvent.getMarketPlaceEventId();
+      String value = objectMapper.writeValueAsString(marketPlaceEvent);
+      SendResult<Integer,String> sendResult = null;
+
+      try {
+          sendResult  = kafkaTemplate.sendDefault(key,value).get();
+      } catch (InterruptedException | ExecutionException e) {
+          e.printStackTrace();
+      }
+
+      return sendResult;
+  }
+
+  // TODO - exercise 1 - implement a producer to produce event into a specific topic.
 }
