@@ -1,16 +1,13 @@
 spring:
-  config:
-    activate:
-      on-profile: local
+  profiles:
+    active: local
   kafka:
     template:
       default-topic: market-place-events
     producer:
-      bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+      bootstrap-servers: localhost:9092 ,localhost:9093,localhost:9094
       key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    admin:  # this configuration should never be used in production environment
-      properties:
-        bootstrap.servers: localhost:9092,localhost:9093,localhost:9094
+
 
 
