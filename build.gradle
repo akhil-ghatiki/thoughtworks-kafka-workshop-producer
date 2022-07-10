@@ -31,6 +31,12 @@ dependencies {
 build.dependsOn(tasks.googleJavaFormat)
 verifyGoogleJavaFormat.mustRunAfter(tasks.googleJavaFormat)
 
+sourceSets {
+	test {
+		java.srcDirs = ['src/test/java/unit','src/test/java/integration']
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
