@@ -23,6 +23,7 @@ public class MarketPlaceController {
 
     marketPlaceEventProducer.sendMarketPlaceEvent(marketPlaceEvent);
     // TODO - exercise 0 - try using synchronous producer here.
+    //    marketPlaceEventProducer.sendMarketPlaceEventAsProducerRecord(marketPlaceEvent);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(marketPlaceEvent);
   }
