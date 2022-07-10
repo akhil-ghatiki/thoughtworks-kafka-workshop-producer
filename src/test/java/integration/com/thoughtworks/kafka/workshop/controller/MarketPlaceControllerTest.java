@@ -7,13 +7,11 @@ import com.thoughtworks.kafka.workshop.data.Product;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.consumer.Consumer;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -47,11 +45,9 @@ public class MarketPlaceControllerTest {
         new DefaultKafkaConsumerFactory<>(
                 consumerConfig, new IntegerDeserializer(), new StringDeserializer())
             .createConsumer();
-    embeddedKafkaBroker.consumeFromAllEmbeddedTopics(consumer);
   }
 
   @Test
-  @Timeout(6)
   public void postMarketPlaceEvent() throws InterruptedException {
     Product product =
         Product.builder()
@@ -71,16 +67,15 @@ public class MarketPlaceControllerTest {
 
     assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
 
-    ConsumerRecord<Integer, String> consumerRecord =
-        KafkaTestUtils.getSingleRecord(consumer, "market-place-events");
-    String value = consumerRecord.value();
-    String expectedValue =
-        "{\"marketPlaceEventId\":9,\"product\":{\"productId\":3,\"productName\":\"integration-name\",\"productBrand\":\"integration-brand\"}}";
-    assertEquals(expectedValue, value);
+    // TODO - consume the record and evaluate if the correct payload was produced.
+
+    // TODO - [Subtask - ONLY after above `TODO` is completed]
+    // Think what could potentially go wrong when you consume the payload here
+
   }
 
   @AfterEach
   public void tearDown() {
-    consumer.close();
+    // TODO - its a good practice to close the consumer after each test case.
   }
 }
