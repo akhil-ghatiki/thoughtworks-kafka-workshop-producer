@@ -51,24 +51,9 @@ public class MarketPlaceEventProducer {
     return sendResult;
   }
 
-  // TODO - exercise 1 - implement a producer to produce event into a specific topic.
+  // TODO - exercise 1 - implement a producer to publish event into a specific topic.
 
-  public void sendMarketPlaceEventAsProducerRecord(MarketPlaceEvent marketPlaceEvent)
-      throws JsonProcessingException {
-    Integer key = marketPlaceEvent.getMarketPlaceEventId();
-    String value = objectMapper.writeValueAsString(marketPlaceEvent);
-
-    List<Header> eventHeaders =
-        List.of(
-            new RecordHeader("event-source", "source-name".getBytes()),
-            new RecordHeader("foo", "bar".getBytes()));
-    ProducerRecord<Integer, String> producerRecord =
-        new ProducerRecord<>("market-place-events", null, key, value, eventHeaders);
-
-    ListenableFuture<SendResult<Integer, String>> listenableFuture =
-        kafkaTemplate.send(producerRecord);
-    listenableFutureCallback(key, value, listenableFuture);
-  }
+ // TODO - exercise 4  - publish an event into kafka with a key and check how they end up into partitions
 
   private void listenableFutureCallback(
       Integer key, String value, ListenableFuture<SendResult<Integer, String>> listenableFuture) {
