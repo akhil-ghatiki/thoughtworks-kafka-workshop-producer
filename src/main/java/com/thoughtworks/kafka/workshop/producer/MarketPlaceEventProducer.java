@@ -76,13 +76,13 @@ public class MarketPlaceEventProducer {
         new ListenableFutureCallback<>() {
           @Override
           public void onFailure(Throwable ex) {
-            log.error("Event sending success - key: {} - value: {}", key, value, ex);
+            log.error("Failed to send the event - key: {} - value: {}", key, value, ex);
           }
 
           @Override
           public void onSuccess(SendResult<Integer, String> result) {
             log.info(
-                "Event sending success - key: {} - value: {} - metaData: {}",
+                "Event sending successful - key: {} - value: {} - metaData: {}",
                 key,
                 value,
                 result.getRecordMetadata().toString());
