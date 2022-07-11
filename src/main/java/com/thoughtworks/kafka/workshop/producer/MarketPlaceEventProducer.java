@@ -82,10 +82,10 @@ public class MarketPlaceEventProducer {
           @Override
           public void onSuccess(SendResult<Integer, String> result) {
             log.info(
-                "Event sending successful - key: {} - value: {} - metaData: {}",
+                "Event sending successful - key: {} - value: {} - partition: {}",
                 key,
                 value,
-                result.getRecordMetadata().toString());
+                result.getRecordMetadata().partition());
           }
         });
   }
