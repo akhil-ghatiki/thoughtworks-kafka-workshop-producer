@@ -31,9 +31,25 @@ public class KafkaProducerConfiguration {
         properties.put(
                 ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);
-        properties.put(ProducerConfig.ACKS_CONFIG,"all");
-        properties.put(ProducerConfig.RETRIES_CONFIG,5);
-        properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG,300);
+
+        //TODO - exercise - Update the topic market-place-events configuration using console.
+        // set min.insync.replicas as 3. (Probably you might need to delete the log dirs and reformat them)
+
+
+
+        // TODO - exercise - Add below broker properties using configuration
+        //      acks=all
+        //      retries=5
+        //      retry back off = 1000
+
+
+        // TODO - exercise -
+        //  1. Produce the payload to the topic.
+        //  2. Now kill one broker among 3 (use ctrl+c to kill) and try producing the payload.
+        //  3. Observe the behaviour.
+        //  4. Bring back the killed broker and produce the payload.
+        //  5. Observe the behaviour
+
         return new DefaultKafkaProducerFactory<>(properties);
     }
 
