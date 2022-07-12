@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.config.TopicBuilder;
 
-@Configuration //Enable this for autoConfiguration
-@Profile("local")
+//@Configuration //Enable this for autoConfiguration
+//@Profile("local")
 public class AutoConfig {
 
   /**
