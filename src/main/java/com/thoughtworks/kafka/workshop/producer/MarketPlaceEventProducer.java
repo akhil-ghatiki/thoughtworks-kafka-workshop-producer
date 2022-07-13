@@ -51,7 +51,6 @@ public class MarketPlaceEventProducer {
     return sendResult;
   }
 
-  // TODO - exercise 1 - implement a producer to produce event into a specific topic.
 
   public void sendMarketPlaceEventAsProducerRecord(MarketPlaceEvent marketPlaceEvent)
       throws JsonProcessingException {
