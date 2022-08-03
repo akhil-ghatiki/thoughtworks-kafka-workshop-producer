@@ -50,4 +50,8 @@ public class MarketPlaceEventProducer {
   }
 
   // TODO - exercise 1 - implement a producer to produce event into a specific topic.
+  // TODO - exercise 2 - produce event using producer records.
+  // TODO - exercise 3 - Create at least 2 headers and send them as part of the event. Hint: explore producerRecord API
+  // TODO - exercise 4  - publish an event into kafka with a key and check how they end up into partitions
+
 }
