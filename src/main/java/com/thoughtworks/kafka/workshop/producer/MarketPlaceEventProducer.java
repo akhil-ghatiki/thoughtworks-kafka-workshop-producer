@@ -21,7 +21,7 @@ public class MarketPlaceEventProducer {
 
   @Autowired ObjectMapper objectMapper;
 
-  public void sendMarketPlaceEvent(MarketPlaceEvent marketPlaceEvent)
+  public void sendMarketPlaceEventAsynchronous(MarketPlaceEvent marketPlaceEvent)
       throws JsonProcessingException {
 
     Integer key = marketPlaceEvent.getMarketPlaceEventId();

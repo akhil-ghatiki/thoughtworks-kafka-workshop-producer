@@ -21,7 +21,7 @@ public class MarketPlaceController {
   public ResponseEntity<MarketPlaceEvent> postMarketPlaceEvent(
       @RequestBody MarketPlaceEvent marketPlaceEvent) throws JsonProcessingException {
 
-    marketPlaceEventProducer.sendMarketPlaceEvent(marketPlaceEvent);
+    marketPlaceEventProducer.sendMarketPlaceEventAsynchronous(marketPlaceEvent);
     // TODO - exercise 0 - try using synchronous producer here.
 
     return ResponseEntity.status(HttpStatus.CREATED).body(marketPlaceEvent);
