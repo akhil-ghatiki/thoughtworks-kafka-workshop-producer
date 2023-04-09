@@ -11,7 +11,7 @@ services:
     ports:
       - "23181:3181"
   kafka-workshop-1:
-    image: confluentinc/cp-kafka
+    image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper-1
     container_name: kafka-workshop-1
@@ -28,7 +28,7 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
 
   kafka-workshop-2:
-    image: confluentinc/cp-kafka
+    image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper-1
     container_name: kafka-workshop-2
@@ -45,7 +45,7 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
 
   kafka-workshop-3:
-    image: confluentinc/cp-kafka
+    image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper-1
     container_name: kafka-workshop-3
