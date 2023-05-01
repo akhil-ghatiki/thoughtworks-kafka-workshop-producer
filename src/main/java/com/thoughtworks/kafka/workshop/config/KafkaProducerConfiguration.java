@@ -33,7 +33,7 @@ public class KafkaProducerConfiguration {
                 StringSerializer.class);
 
         //TODO - exercise - Update the topic market-place-events configuration using console.
-        // set min.insync.replicas as 3. (Probably you might need to delete the log dirs and reformat them)
+        // set min.insync.replicas as 3.
 
 
 
