@@ -1,0 +1,83 @@
+version: '2'
+services:
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper
+    container_name: zookeeper-1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 3181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+    ports:
+      - "23181:3181"
+  kafka-workshop-1:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper-1
+    container_name: kafka-workshop-1
+    ports:
+      - "9092:9092"
+    restart: always
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:3181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-workshop-1:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
+
+  kafka-workshop-2:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper-1
+    container_name: kafka-workshop-2
+    ports:
+      - "9093:9093"
+    restart: always
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:3181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-workshop-2:29093,PLAINTEXT_HOST://localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
+
+  kafka-workshop-3:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper-1
+    container_name: kafka-workshop-3
+    ports:
+      - "9094:9094"
+    restart: always
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:3181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-workshop-3:29094,PLAINTEXT_HOST://localhost:9094
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
+
+  kafka-workshop-ui:
+    image: provectuslabs/kafka-ui
+    depends_on:
+      - kafka-workshop-1
+      - kafka-workshop-2
+      - kafka-workshop-3
+    container_name: kafka-workshop-ui
+    ports:
+      - "8095:8080"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=kafka-workshop-1
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka-workshop-1:29092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=localhost:23181
+      - KAFKA_CLUSTERS_1_NAME=kafka-workshop-2
+      - KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS=kafka-workshop-2:29093
+      - KAFKA_CLUSTERS_1_ZOOKEEPER=localhost:23181
+      - KAFKA_CLUSTERS_2_NAME=kafka-workshop-3
+      - KAFKA_CLUSTERS_2_BOOTSTRAPSERVERS=kafka-workshop-3:29094
+      - KAFKA_CLUSTERS_2_ZOOKEEPER=localhost:23181
