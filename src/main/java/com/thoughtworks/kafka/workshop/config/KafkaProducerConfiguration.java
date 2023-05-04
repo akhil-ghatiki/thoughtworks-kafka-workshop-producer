@@ -24,9 +24,6 @@ public class KafkaProducerConfiguration {
         ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093,localhost:9094");
     properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class);
     properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-    properties.put(ProducerConfig.ACKS_CONFIG, "all");
-    properties.put(ProducerConfig.RETRIES_CONFIG, 5);
-    properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 300);
     return new DefaultKafkaProducerFactory<>(properties);
   }
 
